@@ -1,0 +1,454 @@
+/* Feedback Approval Card (Admin) */
+.feedback-approval-card {
+  background: #f8fafc;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(30, 41, 59, 0.10);
+  margin-bottom: 22px;
+  border: 1.5px solid #e5e7eb;
+  max-width: 420px;
+  min-width: 240px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px 18px 16px 18px;
+}
+/* Dashboard Layout */
+.dashboard-layout {
+  display: flex;
+  min-height: 80vh;
+}
+.sidebar {
+  width: 240px;
+  background: #f1f5f9;
+  border-right: 1px solid #e5e7eb;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  .car-card {
+    background: #fff;
+    padding: 14px 14px 16px 14px;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(30, 41, 59, 0.10);
+    margin-bottom: 22px;
+    border: 1.5px solid #e5e7eb;
+    max-width: 290px;
+    min-width: 240px;
+    margin-left: 12px;
+    margin-right: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .car-card img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e7ef;
+  }
+  .car-card h4 {
+    margin: 4px 0 2px 0;
+    color: #1d4ed8;
+    font-size: 1.13rem;
+    font-weight: 700;
+  }
+  .car-card p {
+    font-size: 13px;
+    color: #334155;
+    margin-bottom: 4px;
+  }
+  .admin-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .admin-actions button {
+    flex: 1 1 0;
+    padding: 7px 0;
+    border: none;
+    background: #38bdf8;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0 0 0 0;
+    transition: background 0.18s;
+    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.07);
+    letter-spacing: 0.01em;
+  }
+  .admin-actions button + button {
+    margin-left: 8px;
+  }
+  .admin-actions button:hover {
+    background: #0ea5e9;
+    color: #fff;
+  }
+  .feedback-item {
+    background: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.07);
+    padding: 14px 14px 12px 14px;
+    margin-bottom: 18px;
+    border: 1.2px solid #e5e7eb;
+    max-width: 290px;
+    min-width: 240px;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+  .feedback-item {
+    background: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(30, 41, 59, 0.07);
+    padding: 14px 18px 12px 18px;
+    margin-bottom: 18px;
+    border: 1.2px solid #e5e7eb;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .feedback-item h4 {
+    color: #1d4ed8;
+    font-size: 1.08rem;
+    margin: 0 0 2px 0;
+    font-weight: 600;
+  }
+  .feedback-item p {
+    color: #334155;
+    font-size: 13px;
+    margin: 0 0 4px 0;
+  }
+  .feedback-item .star-rating, .car-card .star-rating {
+    margin-bottom: 4px;
+  }
+}
+.sidebar-stats ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar-stats li {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.dashboard-main {
+  flex: 1;
+  padding: 32px 24px;
+}
+@media (max-width: 900px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    flex-direction: row;
+    gap: 16px;
+    padding: 12px 6px;
+    align-items: flex-start;
+  }
+  .dashboard-main {
+    padding: 16px 4px;
+  }
+}
+/* Responsive Design */
+@media (max-width: 900px) {
+  .container {
+    max-width: 100%;
+    padding: 12px;
+  }
+  .card {
+    padding: 12px;
+    margin-top: 18px;
+  }
+  .car-card img {
+    height: 100px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 4px;
+  }
+  .card {
+    padding: 6px;
+    margin-top: 10px;
+  }
+  .car-card {
+    padding: 6px;
+  }
+  .car-card img {
+    height: 60px;
+    border-radius: 4px;
+  }
+  .car-card h4 {
+    font-size: 1rem;
+  }
+  .car-card p {
+    font-size: 12px;
+  }
+  .car-card button {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+  .site-header .container, .site-footer {
+    padding: 8px 4px;
+    font-size: 13px;
+  }
+}
+.thumb-highlight {
+  border: 2px solid #1d4ed8 !important;
+  box-shadow: 0 0 0 2px #93c5fd;
+}
+:root {
+  --primary: #1d4ed8;
+  --bg: #f7fafc;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --radius: 10px;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.site-header {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 0;
+  text-align: center;
+}
+
+.brand {
+  color: var(--primary);
+  font-weight: 700;
+  margin: 0;
+}
+
+.nav a {
+  margin-left: 12px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: var(--primary);
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+  margin-top: 30px;
+}
+
+.card h2 {
+  margin-bottom: 14px;
+  color: var(--primary);
+}
+
+.card input,
+.card textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius);
+  font-size: 15px;
+}
+
+.card button {
+  width: 100%;
+  padding: 10px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background: #2563eb;
+}
+
+.msg {
+  text-align: center;
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.car-card {
+  background: #fff;
+  padding: 10px;
+  border-radius: var(--radius);
+  box-shadow: 0 3px 6px rgba(15, 23, 42, 0.1);
+}
+
+.car-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.car-card h4 {
+  margin: 8px 0;
+  color: var(--primary);
+}
+
+.car-card p {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.car-card button {
+  padding: 8px 12px;
+  border: none;
+  background: rgb(63, 68, 221);
+  color: white;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.car-card button:hover {
+  background: rgb(0, 195, 255);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #1e3a8a;
+}
+
+select, textarea, input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Seat selection buttons */
+.seat-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.seat-options button {
+  background: #e2e8f0;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.seat-options button.selected {
+  background: #1d4ed8;
+  color: white;
+}
+
+/* Drag & drop zone */
+.drop-zone {
+  border: 2px dashed #3b82f6;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  background: #f9fafb;
+  transition: 0.3s, border 0.3s;
+}
+
+.drop-zone:hover {
+  background: #eff6ff;
+  border-color: #1d4ed8;
+}
+
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.preview img {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+/* Smooth transition for custom input fields */
+#customCarType, #customSeating {
+  transition: all 0.3s ease;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+#customCarType:focus, #customSeating:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 4px rgba(37, 99, 235, 0.3);
+}
+.drop-zone {
+  border: 2px dashed #4f46e5;
+  padding: 20px;
+  text-align: center;
+  background: #f9fafb;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.drop-zone:hover {
+  background: #eef2ff;
+}
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.preview img {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}

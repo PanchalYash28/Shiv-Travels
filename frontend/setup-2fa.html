@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Setup 2FA – Shiv Travels</title>
+  <link rel="stylesheet" href="login.css" />
+  <style>
+    .qr-container {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .qr-container img {
+      max-width: 300px;
+      border: 2px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .backup-codes {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+
+    .backup-codes h4 {
+      color: #f57c00;
+      margin: 0 0 10px 0;
+      font-size: 1em;
+    }
+
+    .backup-codes p {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      word-break: break-all;
+      line-height: 1.6;
+      margin: 0;
+      color: #333;
+    }
+
+    .secret-key {
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      word-break: break-all;
+      text-align: center;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .button-group button {
+      flex: 1;
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 15px 0;
+      font-size: 0.9em;
+      color: #1565c0;
+    }
+
+    .step-number {
+      background: #2196f3;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Shiv Travels</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>🔐 Setup Google Authenticator (2FA)</h2>
+
+      <!-- STEP 1: Display QR Code & Secret -->
+      <div id="step1">
+        <div class="info-box">
+          <span class="step-number">1</span>
+          <strong>Download Google Authenticator App</strong>
+          <p style="margin: 5px 0 0 40px;">
+            Download on <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Android</a> or 
+            <a href="https://apps.apple.com/app/google-authenticator/id388497605" target="_blank">iOS</a>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <span class="step-number">2</span>
+          <strong>Scan This QR Code</strong>
+          <p style="margin: 10px 0 0 40px;">Use your app to scan this code:</p>
+        </div>
+
+        <div class="qr-container">
+          <div id="qrCode"></div>
+        </div>
+
+        <p style="text-align: center; color: #666; margin: 15px 0;">OR manually enter this secret key:</p>
+
+        <div class="secret-key" id="secretKey"></div>
+
+        <p style="color: #999; font-size: 0.9em; text-align: center;">
+          ⚠️ Keep this secret safe. Anyone with this key can access your account.
+        </p>
+
+        <input id="totpCode" type="text" placeholder="Enter 6-digit code from Google Authenticator" maxlength="6" required />
+        <button id="verifyTotpBtn">✅ Verify & Enable 2FA</button>
+      </div>
+
+      <!-- STEP 2: Show Backup Codes -->
+      <div id="step2" style="display:none;">
+        <div class="info-box">
+          <strong>✅ Google Authenticator Enabled!</strong>
+          <p style="margin-top: 5px;">Your account is now secured with 2FA</p>
+        </div>
+
+        <div class="backup-codes">
+          <h4>🔑 Save Your Backup Codes</h4>
+          <p id="backupCodes"></p>
+          <p style="margin-top: 10px; color: #e65100;">
+            <strong>⚠️ Important:</strong> Save these codes in a safe place. Each code can only be used once if you lose access to your authenticator.
+          </p>
+        </div>
+
+        <div class="button-group">
+          <button id="copyCodes" style="background-color: #17a2b8;">📋 Copy Codes</button>
+          <button id="finishBtn" style="background-color: #28a745;">✅ Finish Setup</button>
+        </div>
+      </div>
+
+      <p id="msg" class="msg"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Shiv Travels | Contact: <a href="https://wa.me/919824926485" target="_blank">+91 9824926485</a></p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script>
+    const API_BASE = ((window.SHIV_CONFIG && window.SHIV_CONFIG.apiBase) || 'http://localhost:4000/api') + '/auth';
+    const msg = document.getElementById('msg');
+
+    // Get TOTP data from localStorage (set during registration)
+    const totpSecret = localStorage.getItem('totpSecret');
+    const totpQRCode = localStorage.getItem('totpQRCode');
+    const totpBackupCodes = JSON.parse(localStorage.getItem('totpBackupCodes') || '[]');
+    const userId = localStorage.getItem('userId');
+
+    // Display QR code and secret
+    if (totpQRCode) {
+      document.getElementById('qrCode').innerHTML = `<img src="${totpQRCode}" alt="QR Code" />`;
+    } else {
+      showMsg('❌ QR code not found. Please go back to registration.', 'error');
+    }
+
+    if (totpSecret) {
+      document.getElementById('secretKey').textContent = totpSecret;
+    }
+
+    // Verify TOTP code
+    document.getElementById('verifyTotpBtn').addEventListener('click', async () => {
+      const totpToken = document.getElementById('totpCode').value.trim();
+
+      if (!totpToken || totpToken.length !== 6) {
+        showMsg('❌ Please enter a valid 6-digit code', 'error');
+        return;
+      }
+
+      if (!userId || !totpSecret) {
+        showMsg('❌ Missing user data. Please try registration again.', 'error');
+        return;
+      }
+
+      try {
+        showMsg('🔐 Verifying code...');
+        const res = await fetch(`${API_BASE}/verify-totp-setup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId,
+            totpToken,
+            secret: totpSecret,
+            backupCodes: totpBackupCodes
+          })
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+          showMsg('✅ 2FA enabled successfully!', 'success');
+          document.getElementById('step1').style.display = 'none';
+          document.getElementById('step2').style.display = 'block';
+          
+          // Display backup codes
+          document.getElementById('backupCodes').textContent = data.backupCodes.join('\n');
+        } else {
+          showMsg('❌ ' + (data.error || 'Invalid code. Try again.'), 'error');
+        }
+      } catch (err) {
+        showMsg('❌ Server error: ' + err.message, 'error');
+      }
+    });
+
+    // Copy backup codes
+    document.getElementById('copyCodes').addEventListener('click', () => {
+      const codes = document.getElementById('backupCodes').textContent;
+      navigator.clipboard.writeText(codes).then(() => {
+        showMsg('✅ Codes copied to clipboard!', 'success');
+      }).catch(() => {
+        showMsg('❌ Failed to copy codes', 'error');
+      });
+    });
+
+    // Finish setup
+    document.getElementById('finishBtn').addEventListener('click', () => {
+      // Clear temporary TOTP data
+      localStorage.removeItem('totpSecret');
+      localStorage.removeItem('totpQRCode');
+      localStorage.removeItem('totpBackupCodes');
+
+      showMsg('👋 Setup complete! Redirecting to home...');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1000);
+    });
+
+    function showMsg(text, type = 'info') {
+      msg.textContent = text;
+      msg.className = 'msg ' + type;
+      msg.style.display = text ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>

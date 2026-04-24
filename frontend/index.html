@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shiv Travels</title>
+  <meta name="description" content="Rent premium cars for your travel needs with Shiv Travels." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-wrap">
+        <img id="brandLogo" class="brand-logo" src="assets/brand/logo.svg" alt="Shiv Travels logo" />
+        <h1 id="brandName" class="brand">Shiv Travels</h1>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#cars" data-scroll="cars">Cars</a>
+        <a href="#services" data-scroll="services">Services</a>
+        <a href="#requirements" data-scroll="requirements">Custom Requirements</a>
+        <a href="#trips" data-scroll="trips">Plan My Trip</a>
+        <a href="#support" data-scroll="support">Support</a>
+        <a href="feedback.html">Feedback</a>
+
+        <a href="profile.html" id="nav-profile" style="display:none;">Profile</a>
+        <a href="admin-dashboard.html" id="nav-admin" style="display:none;">Admin</a>
+        <a href="#" id="nav-logout" style="display:none;">Logout</a>
+        <a href="create-account.html" id="nav-register">Create Account</a>
+        <a href="login.html" id="nav-login">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h2 id="heroTitle">Your Journey, Our Cars</h2>
+          <p id="heroSubtitle">Explore premium cars for every trip — sedans, SUVs, tempo travellers and more.</p>
+          <div class="hero-ctas">
+            <a class="btn primary" href="#cars">View Cars</a>
+            <a id="heroCallBtn" class="btn secondary" href="tel:+919824926485">Call Agent</a>
+          </div>
+        </div>
+
+        <div class="featured-wrap">
+          <div class="flip-card" id="featuredFlipCard" role="button" tabindex="0" aria-label="Featured Innova Crysta card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flip-back-content">
+                  <div class="back-title"><p style="color: white;">Fast Enquiry</p></div>
+                  <div class="back-subtitle"><p style="color: white;">Call now or WhatsApp for availability.</p></div>
+                  <div class="back-buttons">
+                    <a id="featuredCallLinkBack" class="btn primary back-btn" href="tel:+919824926485">Call</a>
+                    <a id="featuredWhatsAppLinkBack" class="btn secondary back-btn" target="_blank" rel="noopener noreferrer" href="#">WhatsApp</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flip-card-back">
+                <div class="flip-header">
+                  <img id="featuredBrandLogoFront" class="featured-brand-logo" src="assets/brand/logo.svg" alt="Shiv Travels" />
+                </div>
+                  <div>
+                    <div class="featured-brand-text">Shiv Travels</div>
+                    <div class="featured-card-tag">Featured Deal</div>
+                  </div>
+
+                <div class="flip-car-image">
+                  <img id="featuredCarImage" src="assets/images/innova-crysta.svg" alt="Innova Crysta" />
+                </div>
+
+                <div class="flip-car-name" id="featuredCarName">-</div>
+                <div class="flip-contact">
+                  <span class="meta-line">Contact</span>
+                  <a id="featuredCallLinkFront" class="contact-link" href="tel:+919824926485">+91 9824926485</a>
+                </div>
+
+                <div class="flip-action-hint">Tap to flip</div>
+              </div>
+            </div>
+          </div>
+          <div class="muted flip-microcopy">Modern rides. Instant support.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cars" class="section container">
+      <div class="section-title-row">
+        <h3>Available Cars</h3>
+        <p class="muted">Browse vehicles and view details anytime.</p>
+      </div>
+      <div id="car-list" class="cards-grid"></div>
+      <p id="empty-msg" class="muted" style="display:none">No cars available right now.</p>
+    </section>
+
+    <section id="services" class="section container">
+      <div class="section-title-row">
+        <h3 id="servicesIntro">Services provided by Shiv Travels</h3>
+      </div>
+      <div id="services-list" class="cards-grid cards-grid-services"></div>
+    </section>
+
+    <section id="whychoose" class="section container">
+      <div class="section-title-row">
+        <h3 id="whyChooseTitle">Why Choose Shiv Travel</h3>
+      </div>
+      <div id="why-list" class="cards-grid cards-grid-why"></div>
+    </section>
+
+    <section id="mission-vision" class="section container">
+      <div class="two-col-split">
+        <div class="info-card">
+          <h3>Our Mission</h3>
+          <p id="missionText"></p>
+        </div>
+        <div class="info-card">
+          <h3>Our Vision</h3>
+          <p id="visionText"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="trips" class="section container">
+      <div class="section-title-row">
+        <h3>Plan My Trip</h3>
+        <p class="muted">Add your trip and share your custom needs.</p>
+      </div>
+      <div class="two-col-split">
+        <div class="info-card">
+          <h4>Trip Request</h4>
+          <form id="tripForm" class="form-grid">
+            <input id="tripName" type="text" placeholder="Your name (optional)" />
+            <input id="tripPhone" type="text" placeholder="Your contact number" required />
+            <input id="tripTitle" type="text" placeholder="Trip title (e.g. Vadodara to Goa)" required />
+            <input id="tripFromLocation" type="text" placeholder="From (optional)" />
+            <input id="tripDestination" type="text" placeholder="Destination (optional)" />
+            <input id="tripTravelDate" type="text" placeholder="Travel date (optional)" />
+            <input id="tripPassengers" type="text" placeholder="Passengers (optional)" />
+            <textarea id="tripCustomNeeds" placeholder="Custom needs for this trip..." required></textarea>
+            <button class="primary-btn" type="submit">Send Trip Request</button>
+            <p id="tripMsg" class="form-msg" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="info-card">
+          <h4>What happens next?</h4>
+          <p class="muted">
+            Your request is saved to the admin panel. Admin will contact you to plan the best itinerary and pricing.
+          </p>
+          <ul class="bullets">
+            <li>Fast response</li>
+            <li>Custom itinerary planning</li>
+            <li>Transparent next steps</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="requirements" class="section container">
+      <div class="section-title-row">
+        <h3>Custom Requirements</h3>
+        <p class="muted">Tell us your requirements. We will message the admin on WhatsApp.</p>
+      </div>
+      <div class="two-col-split">
+        <div class="info-card">
+          <h4>Requirement Form</h4>
+          <form id="requirementForm" class="form-grid">
+            <input id="reqName" type="text" placeholder="Your name (optional)" />
+            <input id="reqPhone" type="text" placeholder="Your contact number" required />
+            <textarea id="reqText" placeholder="Requirement details (city, dates, number of passengers, car type, etc.)" required></textarea>
+            <button class="primary-btn" type="submit">Send Requirement</button>
+            <p id="reqMsg" class="form-msg" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="info-card">
+          <h4>Why share requirements?</h4>
+          <p class="muted">It helps us match the right car and plan the right route.</p>
+          <div class="trust-row">
+            <div class="trust-pill">Best price</div>
+            <div class="trust-pill">Quick planning</div>
+            <div class="trust-pill">Support on time</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="section container">
+      <div class="section-title-row">
+        <h3>Customer Support</h3>
+        <p class="muted">Complaints or queries. Admin will review and respond.</p>
+      </div>
+      <div class="two-col-split">
+        <div class="info-card">
+          <h4>Contact Support</h4>
+          <form id="supportForm" class="form-grid">
+            <input id="supportName" type="text" placeholder="Your name (optional)" />
+            <input id="supportPhone" type="text" placeholder="Your contact number" required />
+            <select id="supportCategory">
+              <option value="complaint">Complaint</option>
+              <option value="query" selected>Query</option>
+            </select>
+            <input id="supportSubject" type="text" placeholder="Subject (optional)" />
+            <textarea id="supportMessage" placeholder="Write your complaint or query..." required></textarea>
+            <button class="primary-btn" type="submit">Submit to Admin</button>
+            <p id="supportMsg" class="form-msg" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="info-card">
+          <h4>Direct contact</h4>
+          <p class="muted">If you want urgent help, call or WhatsApp the Shiv Travels support number.</p>
+          <div class="back-buttons">
+            <a id="supportCallBtn" class="btn primary back-btn" href="tel:+919824926485">Call</a>
+            <a id="supportWhatsAppLink" class="btn secondary back-btn" target="_blank" rel="noopener noreferrer" href="https://wa.me/919824926485">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section container">
+      <div class="section-title-row">
+        <h3>Customer Feedback</h3>
+        <p class="muted">Only approved feedback is visible to everyone.</p>
+      </div>
+      <div id="feedback-list" class="cards-grid cards-grid-why"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-cta" id="footerCtaText">Let’s Plan Your Next Trip ✨</div>
+          <p class="muted footer-subtext">Whether solo backpacking or a family vacation, Shiv Travel is just a click away.</p>
+        </div>
+        <div class="footer-card">
+          <div class="footer-label">Contact Support</div>
+          <div class="footer-actions">
+            <a id="footerSupportScroll" class="btn primary" href="#support" data-scroll="support">Contact Support</a>
+            <a id="footerWhatsAppLink" class="btn secondary" target="_blank" rel="noopener noreferrer" href="#">WhatsApp</a>
+          </div>
+        </div>
+        <div class="footer-card">
+          <div class="footer-label">Phone</div>
+          <a id="footerCallLink" class="footer-phone" href="tel:+919824926485">+91 9824926485</a>
+          <div class="footer-location" id="footerLocation">Vadodara, Gujarat, India</div>
+        </div>
+      </div>
+
+      <div class="footer-bottom muted">© 2025 Shiv Travels</div>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-label="Innova Crysta">
+  <defs>
+    <linearGradient id="carG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="carStroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1d4ed8"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect x="30" y="30" width="860" height="460" rx="36" fill="url(#carG)" stroke="#e5e7eb" stroke-width="2"/>
+  <!-- Wheels -->
+  <g>
+    <circle cx="250" cy="360" r="62" fill="#0f172a" opacity="0.08"/>
+    <circle cx="250" cy="360" r="46" fill="#0f172a" opacity="0.12" stroke="url(#carStroke)" stroke-width="6"/>
+    <circle cx="250" cy="360" r="10" fill="#1d4ed8"/>
+  </g>
+  <g>
+    <circle cx="680" cy="360" r="62" fill="#0f172a" opacity="0.08"/>
+    <circle cx="680" cy="360" r="46" fill="#0f172a" opacity="0.12" stroke="url(#carStroke)" stroke-width="6"/>
+    <circle cx="680" cy="360" r="10" fill="#1d4ed8"/>
+  </g>
+  <!-- Car body -->
+  <path d="M170 330
+           C190 260, 230 232, 310 222
+           L455 205
+           C500 202, 545 215, 578 243
+           L638 296
+           C660 306, 683 316, 710 318
+           L748 322
+           C770 325, 790 344, 792 366
+           L792 390
+           C792 404, 781 416, 767 416
+           L165 416
+           C151 416, 140 404, 140 390
+           L140 368
+           C140 352, 153 338, 170 330 Z"
+        fill="#ffffff" stroke="url(#carStroke)" stroke-width="6" stroke-linejoin="round"/>
+  <!-- Window -->
+  <path d="M290 250
+           L390 236
+           C420 233, 450 234, 474 241
+           L548 269
+           C562 276, 562 295, 545 295
+           L282 295
+           C266 295, 260 262, 290 250 Z"
+        fill="#1d4ed8" opacity="0.13" stroke="#1d4ed8" stroke-width="4" />
+  <!-- Grill -->
+  <path d="M560 320
+           C580 308, 612 304, 638 308
+           C652 310, 656 324, 646 335
+           C625 358, 586 363, 566 351
+           C556 345, 552 330, 560 320 Z"
+        fill="#1d4ed8" opacity="0.14"/>
+  <!-- Accent -->
+  <path d="M180 334
+           C240 310, 320 298, 420 292
+           C520 286, 608 294, 705 322"
+        fill="none" stroke="url(#carStroke)" stroke-width="6" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="460" y="120" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="48"
+        fill="#1d4ed8" opacity="0.95">Innova Crysta</text>
+</svg>
+

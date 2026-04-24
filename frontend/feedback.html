@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Feedback – Shiv Travels</title>
+  <link rel="stylesheet" href="feedback.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Shiv Travels</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <!-- <a href="login.html">Login</a>
+        <a href="create-account.html">Create Account</a> -->
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Submit Your Feedback</h2>
+  <input id="name" type="text" placeholder="Your Name (required)" />
+  <textarea id="text" placeholder="Write your feedback here..."></textarea>
+  <div id="star-rating" class="star-rating"></div>
+  <button id="submitFeedback">Submit Feedback</button>
+  <p id="msg" class="msg"></p>
+    </section>
+
+    <section class="card">
+      <h2>What Our Customers Say</h2>
+      <div id="feedback-list" class="feedback-list"></div>
+      <style>
+      .star-rating {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+        justify-content: flex-start;
+      }
+      .star {
+        color: #ffd814;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .star.inactive {
+        color: #e5e7eb;
+      }
+      </style>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Shiv Travels | Thank you for your feedback 💙</p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="feedback.js"></script>
+</body>
+</html>

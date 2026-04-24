@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>User Profile – Shiv Travels</title>
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Shiv Travels</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="#" id="logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>My Profile</h2>
+      <p id="msg" class="msg"></p>
+
+      <label>Name</label>
+      <input id="name" type="text" placeholder="Your full name" />
+
+      <label>Email</label>
+      <input id="email" type="email" disabled placeholder="Your email" />
+
+      <label>Phone</label>
+      <input id="phone" type="tel" disabled placeholder="Your phone number" />
+
+      <label>New Password <span style="color: #999;">(optional)</span></label>
+      <input id="password" type="password" placeholder="Leave blank to keep current password" />
+
+      <button id="updateProfile">✅ Update Profile</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Shiv Travels | Profile Page</p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

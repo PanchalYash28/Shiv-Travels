@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login – Shiv Travels</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Shiv Travels</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="create-account.html">Create Account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>🔐 Login</h2>
+
+      <!-- STEP 1: Enter Email & Password -->
+      <div id="step1">
+        <h3 style="margin-bottom: 20px; color: #333; font-size: 1.1em;">📧 Enter Credentials</h3>
+        <input id="emailOrPhone" type="text" placeholder="Email or Phone Number" required />
+        <input id="password" type="password" placeholder="Password" required />
+        <button id="loginBtn">🔓 Next</button>
+        <p style="text-align: center; margin-top: 15px; color: #666;">
+          <a id="forgotPasswordLink" href="forgot-password.html" style="color: #1d4ed8; text-decoration: none; font-weight: 500;">
+            🔑 Forgot Password?
+          </a>
+        </p>
+        <p style="text-align: center; color: #666;">
+          Don't have an account? <a href="create-account.html" style="color: #1d4ed8; text-decoration: none; font-weight: 500;">Create one</a>
+        </p>
+      </div>
+
+      <!-- STEP 2: Choose Authentication Method -->
+      <div id="step2" style="display:none;">
+        <h3 style="margin-bottom: 20px; color: #333; font-size: 1.1em;">✅ Choose Authentication Method</h3>
+        <p id="authMethodMsg" style="color: #666; font-size: 0.9em; margin-bottom: 15px;"></p>
+        
+        <!-- Email OTP Option (Always Available) -->
+        <div id="emailOtpSection">
+          <button id="sendEmailOtpBtn" style="background-color: #17a2b8; margin-bottom: 10px; width: 100%;">
+            📧 Use Email OTP
+          </button>
+        </div>
+
+        <!-- Google Authenticator Option (If Enabled) -->
+        <div id="totpSection" style="display:none;">
+          <button id="useTotpBtn" style="background-color: #28a745; margin-bottom: 10px; width: 100%;">
+            🔐 Use Google Authenticator
+          </button>
+        </div>
+
+        <button id="backBtn" style="background-color: #6c757d; width: 100%; margin-top: 5px;">← Back</button>
+      </div>
+
+      <!-- STEP 3A: Email OTP Verification -->
+      <div id="step3Email" style="display:none;">
+        <h3 style="margin-bottom: 20px; color: #333; font-size: 1.1em;">📧 Enter OTP</h3>
+        <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">Check your email for the 6-digit code</p>
+        <input id="emailOtp" type="text" placeholder="6-digit OTP" maxlength="6" required />
+        <button id="verifyEmailOtpBtn">✅ Login with OTP</button>
+      </div>
+
+      <!-- STEP 3B: Google Authenticator Verification -->
+      <div id="step3Totp" style="display:none;">
+        <h3 style="margin-bottom: 20px; color: #333; font-size: 1.1em;">🔐 Enter TOTP Code</h3>
+        <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">Get 6-digit code from Google Authenticator app</p>
+        <input id="totpCode" type="text" placeholder="6-digit code" maxlength="6" required />
+        <button id="verifyTotpBtn">✅ Login with Google Authenticator</button>
+      </div>
+
+      <p id="msg" class="msg"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Shiv Travels | Contact: <a href="https://wa.me/919824926485" target="_blank">+91 9824926485</a></p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

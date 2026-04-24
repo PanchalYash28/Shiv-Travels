@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Sky background">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eaf4ff"/>
+      <stop offset="0.55" stop-color="#d8efff"/>
+      <stop offset="1" stop-color="#c7e7ff"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="30%" cy="25%" r="55%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mist" cx="70%" cy="35%" r="60%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="520" cy="240" r="330" fill="url(#sun)"/>
+  <circle cx="1180" cy="280" r="380" fill="url(#mist)"/>
+  <!-- soft clouds -->
+  <g fill="#ffffff" opacity="0.55">
+    <path d="M180 320c40-70 150-90 210-40 30-45 110-55 150-10 55-20 115 15 125 70 80 0 120 55 120 95 0 55-55 95-120 95H240c-85 0-150-45-150-110 0-55 40-95 90-100z"/>
+    <path d="M940 360c35-60 135-78 190-35 28-40 100-50 140-8 48-16 100 14 110 60 70 0 105 45 105 78 0 46-45 78-105 78H1010c-78 0-138-38-138-92 0-46 34-78 82-81z"/>
+  </g>
+  <!-- subtle waves -->
+  <path d="M0 720c220-60 420-60 600 0s380 60 600 0 400-60 400-60v240H0z" fill="#bfe6ff" opacity="0.35"/>
+  <path d="M0 770c240-45 440-45 600 0s360 45 600 0 400-45 400-45v175H0z" fill="#a9dcff" opacity="0.22"/>
+</svg>
+

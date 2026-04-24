@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔐 Shiv Travels - MFA Testing Panel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      background: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      color: #667eea;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .tab-btn.active {
+      background: #667eea;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .panel {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .panel h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
+
+    input[type='text']:focus,
+    input[type='email']:focus,
+    input[type='password']:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .response {
+      background: #f5f5f5;
+      border-left: 4px solid #667eea;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+      word-break: break-all;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+
+    .response.success {
+      border-left-color: #4caf50;
+      background: #e8f5e9;
+    }
+
+    .response.error {
+      border-left-color: #f44336;
+      background: #ffebee;
+    }
+
+    .response.info {
+      border-left-color: #2196f3;
+      background: #e3f2fd;
+    }
+
+    .qr-code {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .qr-code img {
+      max-width: 300px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .backup-codes {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 15px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .backup-codes h4 {
+      color: #f57c00;
+      margin-bottom: 10px;
+    }
+
+    .backup-codes p {
+      word-break: break-all;
+      line-height: 1.8;
+    }
+
+    .status {
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+      font-weight: 600;
+    }
+
+    .status.success {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #4caf50;
+    }
+
+    .status.error {
+      background: #ffebee;
+      color: #c62828;
+      border: 1px solid #f44336;
+    }
+
+    .status.info {
+      background: #e3f2fd;
+      color: #1565c0;
+      border: 1px solid #2196f3;
+    }
+
+    .steps {
+      background: #f9f9f9;
+      border-left: 4px solid #667eea;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .steps h4 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .steps ol {
+      margin-left: 20px;
+      line-height: 1.8;
+    }
+
+    .steps li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔐 Shiv Travels MFA Testing</h1>
+      <p>Test Email OTP & Google Authenticator Integration</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('register')">📧 Register</button>
+      <button class="tab-btn" onclick="showTab('totp')">📱 Google Auth</button>
+      <button class="tab-btn" onclick="showTab('login')">🔓 Login</button>
+      <button class="tab-btn" onclick="showTab('status')">ℹ️ Status</button>
+    </div>
+
+    <!-- REGISTER TAB -->
+    <div id="register" class="tab-content active">
+      <div class="panel">
+        <h2>📧 Register with Email OTP</h2>
+
+        <div class="steps">
+          <h4>Steps:</h4>
+          <ol>
+            <li>Fill in email, phone, and name</li>
+            <li>Click "Send OTP"</li>
+            <li>Check email for 6-digit OTP</li>
+            <li>Enter OTP and password</li>
+            <li>Click "Register"</li>
+          </ol>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="regEmail" placeholder="user@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" id="regPhone" placeholder="9876543210" />
+        </div>
+
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="regName" placeholder="John Doe" />
+        </div>
+
+        <button onclick="sendRegistrationOTP()">📧 Send OTP</button>
+
+        <div id="regOTPSection" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+          <div class="status info">
+            ✅ OTP sent! Check your email for the 6-digit code (expires in 10 minutes)
+          </div>
+
+          <div class="form-group">
+            <label>OTP (6 digits from email)</label>
+            <input type="text" id="regOTP" placeholder="123456" maxlength="6" />
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="regPassword" placeholder="Enter a strong password" />
+          </div>
+
+          <button onclick="verifyRegistrationOTP()">✅ Register Account</button>
+        </div>
+
+        <div id="registerResponse" class="response" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- GOOGLE AUTHENTICATOR TAB -->
+    <div id="totp" class="tab-content">
+      <div class="panel">
+        <h2>📱 Setup Google Authenticator (Optional)</h2>
+
+        <div class="steps">
+          <h4>Steps:</h4>
+          <ol>
+            <li>Enter your User ID (from registration response)</li>
+            <li>Click "Generate Secret"</li>
+            <li>Scan QR code with Google Authenticator app</li>
+            <li>Enter 6-digit code from app</li>
+            <li>Click "Enable TOTP"</li>
+            <li>Save backup codes</li>
+          </ol>
+        </div>
+
+        <div class="form-group">
+          <label>User ID</label>
+          <input type="text" id="totpUserId" placeholder="Paste user ID from registration" />
+        </div>
+
+        <button onclick="setupTOTP()">🔑 Generate Secret & QR Code</button>
+
+        <div id="totpSetupSection" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+          <div class="qr-code">
+            <p><strong>📸 Scan this QR code with Google Authenticator:</strong></p>
+            <div id="qrCodeImage"></div>
+          </div>
+
+          <div style="background: #fff3e0; padding: 15px; border-radius: 6px; margin-top: 15px;">
+            <p><strong>Or enter this secret manually:</strong></p>
+            <p style="font-family: monospace; font-weight: bold; margin-top: 10px;" id="totpSecret"></p>
+          </div>
+
+          <div class="form-group" style="margin-top: 20px;">
+            <label>6-Digit Code from Google Authenticator</label>
+            <input type="text" id="totpCode" placeholder="123456" maxlength="6" />
+          </div>
+
+          <button onclick="verifyTOTPSetup()">✅ Enable Google Authenticator</button>
+
+          <div id="backupCodesSection" style="display: none; margin-top: 20px;">
+            <div class="backup-codes">
+              <h4>🔑 Backup Codes (Save in safe place!)</h4>
+              <p id="backupCodesList"></p>
+            </div>
+          </div>
+        </div>
+
+        <div id="totpResponse" class="response" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- LOGIN TAB -->
+    <div id="login" class="tab-content">
+      <div class="panel">
+        <h2>🔓 Login - Choose Your Method</h2>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="loginEmail" placeholder="user@example.com" />
+        </div>
+
+        <button onclick="checkAuthMethods()">🔍 Check Available Methods</button>
+
+        <div id="authMethodsSection" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+          <div id="authMethods" class="status info"></div>
+
+          <!-- EMAIL OTP LOGIN -->
+          <div id="emailLoginSection" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+            <h3 style="color: #667eea; margin-bottom: 15px;">📧 Option 1: Email OTP</h3>
+            <button onclick="sendLoginOTP()">📧 Send OTP</button>
+
+            <div id="loginOTPSection" style="display: none; margin-top: 20px;">
+              <div class="status info">✅ OTP sent to your email!</div>
+              <div class="form-group">
+                <label>6-Digit OTP from Email</label>
+                <input type="text" id="loginOTP" placeholder="123456" maxlength="6" />
+              </div>
+              <button onclick="verifyLoginOTP()">✅ Login with OTP</button>
+            </div>
+          </div>
+
+          <!-- TOTP LOGIN -->
+          <div id="totpLoginSection" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+            <h3 style="color: #667eea; margin-bottom: 15px;">🔐 Option 2: Google Authenticator</h3>
+            <div class="form-group">
+              <label>6-Digit Code from Google Authenticator</label>
+              <input type="text" id="loginTOTPCode" placeholder="123456" maxlength="6" />
+            </div>
+            <button onclick="loginWithTOTP()">🔐 Login with Google Authenticator</button>
+          </div>
+        </div>
+
+        <div id="loginResponse" class="response" style="display: none;"></div>
+      </div>
+    </div>
+
+    <!-- STATUS TAB -->
+    <div id="status" class="tab-content">
+      <div class="panel">
+        <h2>ℹ️ System Status</h2>
+
+        <button onclick="checkSystemStatus()" style="margin-bottom: 20px;">🔄 Refresh Status</button>
+
+        <div id="statusResponse" class="response" style="display: none;"></div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+          <h3 style="color: #333; margin-bottom: 15px;">📋 Quick Reference</h3>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div>
+              <p><strong>✅ Email Setup:</strong></p>
+              <p style="font-size: 0.9em; color: #666;">shivtravels75@gmail.com</p>
+            </div>
+            <div>
+              <p><strong>🚀 Backend URL:</strong></p>
+              <p style="font-size: 0.9em; color: #666;">http://localhost:4000</p>
+            </div>
+            <div>
+              <p><strong>⏱️ OTP Expiry:</strong></p>
+              <p style="font-size: 0.9em; color: #666;">10 minutes</p>
+            </div>
+            <div>
+              <p><strong>🔐 TOTP Validity:</strong></p>
+              <p style="font-size: 0.9em; color: #666;">30 seconds</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:4000/api/auth';
+
+    // Store current state
+    let currentState = {
+      registrationEmail: null,
+      registrationPhone: null,
+      registrationName: null,
+      userId: null,
+      totpSecret: null,
+      backupCodes: null,
+      totpEnabled: false,
+    };
+
+    // TAB SWITCHING
+    function showTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('active');
+      });
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // UTILITY FUNCTIONS
+    function showResponse(elementId, data, type = 'info') {
+      const element = document.getElementById(elementId);
+      element.textContent = JSON.stringify(data, null, 2);
+      element.className = `response ${type}`;
+      element.style.display = 'block';
+    }
+
+    // REGISTRATION
+    async function sendRegistrationOTP() {
+      const email = document.getElementById('regEmail').value;
+      const phone = document.getElementById('regPhone').value;
+      const name = document.getElementById('regName').value;
+
+      if (!email || !phone) {
+        alert('Please fill in email and phone');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/send-email-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, phone, name }),
+        });
+
+        const data = await response.json();
+
+        currentState.registrationEmail = email;
+        currentState.registrationPhone = phone;
+        currentState.registrationName = name;
+
+        if (data.ok) {
+          document.getElementById('regOTPSection').style.display = 'block';
+          showResponse('registerResponse', data, 'success');
+        } else {
+          showResponse('registerResponse', data, 'error');
+        }
+      } catch (err) {
+        showResponse('registerResponse', { error: err.message }, 'error');
+      }
+    }
+
+    async function verifyRegistrationOTP() {
+      const email = currentState.registrationEmail;
+      const otp = document.getElementById('regOTP').value;
+      const password = document.getElementById('regPassword').value;
+      const phone = currentState.registrationPhone;
+      const name = currentState.registrationName;
+
+      if (!otp || !password) {
+        alert('Please fill in OTP and password');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/verify-email-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, otp, phone, name, password }),
+        });
+
+        const data = await response.json();
+
+        if (data.ok) {
+          currentState.userId = data.user.id;
+          localStorage.setItem('authToken', data.token);
+          localStorage.setItem('userId', data.user.id);
+          showResponse('registerResponse', data, 'success');
+          alert('✅ Registration successful! User ID: ' + data.user.id);
+        } else {
+          showResponse('registerResponse', data, 'error');
+        }
+      } catch (err) {
+        showResponse('registerResponse', { error: err.message }, 'error');
+      }
+    }
+
+    // GOOGLE AUTHENTICATOR
+    async function setupTOTP() {
+      const userId = document.getElementById('totpUserId').value;
+
+      if (!userId) {
+        alert('Please enter User ID');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/setup-totp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId }),
+        });
+
+        const data = await response.json();
+
+        if (data.ok) {
+          currentState.userId = userId;
+          currentState.totpSecret = data.secret;
+          currentState.backupCodes = data.backupCodes;
+
+          document.getElementById('totpSetupSection').style.display = 'block';
+          document.getElementById('qrCodeImage').innerHTML = `<img src="${data.qrCode}" alt="QR Code" />`;
+          document.getElementById('totpSecret').textContent = data.secret;
+
+          showResponse('totpResponse', data, 'success');
+        } else {
+          showResponse('totpResponse', data, 'error');
+        }
+      } catch (err) {
+        showResponse('totpResponse', { error: err.message }, 'error');
+      }
+    }
+
+    async function verifyTOTPSetup() {
+      const userId = currentState.userId;
+      const totpToken = document.getElementById('totpCode').value;
+      const secret = currentState.totpSecret;
+      const backupCodes = currentState.backupCodes;
+
+      if (!totpToken) {
+        alert('Please enter 6-digit code from Google Authenticator');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/verify-totp-setup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId, totpToken, secret, backupCodes }),
+        });
+
+        const data = await response.json();
+
+        if (data.ok) {
+          currentState.totpEnabled = true;
+          document.getElementById('backupCodesList').textContent = data.backupCodes.join('\n');
+          document.getElementById('backupCodesSection').style.display = 'block';
+          showResponse('totpResponse', data, 'success');
+          alert('✅ Google Authenticator enabled!');
+        } else {
+          showResponse('totpResponse', data, 'error');
+        }
+      } catch (err) {
+        showResponse('totpResponse', { error: err.message }, 'error');
+      }
+    }
+
+    // LOGIN
+    async function checkAuthMethods() {
+      const email = document.getElementById('loginEmail').value;
+
+      if (!email) {
+        alert('Please enter email');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/check-auth`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+
+        if (data.ok) {
+          document.getElementById('authMethodsSection').style.display = 'block';
+          document.getElementById('authMethods').textContent = data.message;
+
+          if (data.totpEnabled) {
+            document.getElementById('emailLoginSection').style.display = 'block';
+            document.getElementById('totpLoginSection').style.display = 'block';
+          } else {
+            document.getElementById('emailLoginSection').style.display = 'block';
+            document.getElementById('totpLoginSection').style.display = 'none';
+          }
+        } else {
+          alert('Error: ' + data.error);
+        }
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+    }
+
+    async function sendLoginOTP() {
+      const email = document.getElementById('loginEmail').value;
+
+      try {
+        const response = await fetch(`${API_URL}/send-login-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+
+        if (data.ok) {
+          document.getElementById('loginOTPSection').style.display = 'block';
+          showResponse('loginResponse', data, 'success');
+        } else {
+          showResponse('loginResponse', data, 'error');
+        }
+      } catch (err) {
+        showResponse('loginResponse', { error: err.message }, 'error');
+      }
+    }
+
+    async function verifyLoginOTP() {
+      const email = document.getElementById('loginEmail').value;
+      const otp = document.getElementById('loginOTP').value;
+
+      if (!otp) {
+        alert('Please enter OTP');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/verify-login-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, otp }),
+        });
+
+        const data = await response.json();
+
+        if (data.ok) {
+          localStorage.setItem('authToken', data.token);
+          showResponse('loginResponse', data, 'success');
+          alert('✅ Logged in successfully!');
+        } else {
+          showResponse('loginResponse', data, 'error');
+        }
+      } catch (err) {
+        showResponse('loginResponse', { error: err.message }, 'error');
+      }
+    }
+
+    async function loginWithTOTP() {
+      const email = document.getElementById('loginEmail').value;
+      const totpToken = document.getElementById('loginTOTPCode').value;
+
+      if (!totpToken) {
+        alert('Please enter 6-digit code from Google Authenticator');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/verify-totp-login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, totpToken }),
+        });
+
+        const data = await response.json();
+
+        if (data.ok) {
+          localStorage.setItem('authToken', data.token);
+          showResponse('loginResponse', data, 'success');
+          alert('✅ Logged in with Google Authenticator!');
+        } else {
+          showResponse('loginResponse', data, 'error');
+        }
+      } catch (err) {
+        showResponse('loginResponse', { error: err.message }, 'error');
+      }
+    }
+
+    // HEALTH CHECK
+    async function checkSystemStatus() {
+      try {
+        const response = await fetch('http://localhost:4000/api/health');
+        const data = await response.json();
+        showResponse('statusResponse', data, 'success');
+      } catch (err) {
+        showResponse('statusResponse', { error: err.message }, 'error');
+      }
+    }
+
+    // Load user ID from localStorage on page load
+    window.addEventListener('load', () => {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        document.getElementById('totpUserId').value = userId;
+      }
+    });
+  </script>
+</body>
+</html>

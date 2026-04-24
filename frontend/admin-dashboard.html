@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard – Shiv Travels</title>
+  <link rel="stylesheet" href="admin-dashboard.css" />
+  <link rel="stylesheet" href="admin-dashboard-modern.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Shiv Travels Admin</h1>
+      <nav class="nav">
+        <a href="index.html" id="home" class="home-link">Home</a>
+        <a href="#" id="logout" class="logout-link">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="dashboard-layout">
+      <aside class="sidebar" aria-label="Admin navigation">
+        <div class="sidebar-title">Dashboard</div>
+        <button class="sidebar-btn active" data-panel="cars">Cars</button>
+        <button class="sidebar-btn" data-panel="services">Services</button>
+        <button class="sidebar-btn" data-panel="whychoose">Why Choose</button>
+        <button class="sidebar-btn" data-panel="settings">Site Settings</button>
+        <button class="sidebar-btn" data-panel="feedback">Feedback</button>
+        <button class="sidebar-btn" data-panel="requirements">Custom Requirements</button>
+        <button class="sidebar-btn" data-panel="trips">Plan My Trip</button>
+        <button class="sidebar-btn" data-panel="support">Support</button>
+      </aside>
+
+      <section class="dashboard-main">
+        <p id="msg" class="msg admin-msg" aria-live="polite"></p>
+
+        <!-- Cars panel -->
+        <section id="panel-cars" class="panel-section">
+          <div class="card">
+            <h2>Add / Update Car</h2>
+
+            <input id="editCarId" type="hidden" value="" />
+
+            <div class="form-group">
+              <label>Car Name / Model</label>
+              <input id="name" type="text" placeholder="e.g. Toyota Innova Crysta" />
+            </div>
+
+            <div class="form-group">
+              <label>Brand</label>
+              <input id="brand" type="text" placeholder="e.g. Toyota" />
+            </div>
+
+            <div class="form-group">
+              <label>Car Type</label>
+              <select id="carType">
+                <option value="">Select Type</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Hatchback">Hatchback</option>
+                <option value="Luxury">Luxury</option>
+                <option value="Tempo Traveller">Tempo Traveller</option>
+                <option value="Mini Bus">Mini Bus</option>
+                <option value="Other">Other</option>
+              </select>
+              <input id="customCarType" type="text" placeholder="Enter custom type" style="display:none; margin-top:6px;" />
+            </div>
+
+            <div class="form-group">
+              <label>Seating Capacity</label>
+              <select id="seatingCapacity">
+                <option value="">Select Capacity</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="12">12</option>
+                <option value="Other">Other</option>
+              </select>
+              <input id="customSeating" type="text" placeholder="Enter custom seating" style="display:none; margin-top:6px;" />
+            </div>
+
+            <div class="form-group">
+              <label>Description (optional)</label>
+              <textarea id="description" placeholder="Short car description... (optional)"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Features (optional)</label>
+              <input id="features" type="text" placeholder="e.g. AC, Music System, GPS (optional)" />
+            </div>
+
+            <div class="form-group">
+              <label>Upload Car Images</label>
+              <div id="dropZone" class="drop-zone">
+                <p>📤 Drag And drop images here or click to upload</p>
+                <input id="images" type="file" accept="image/*" multiple hidden />
+              </div>
+              <div id="preview" class="preview"></div>
+              <p class="muted small-muted">For update, you can upload new images. Leaving empty keeps current images.</p>
+            </div>
+
+            <button id="addCar" class="primary-btn">Add Car</button>
+          </div>
+
+          <div class="card">
+            <h2>Manage Cars</h2>
+            <div id="car-list" class="grid"></div>
+          </div>
+        </section>
+
+        <!-- Services panel -->
+        <section id="panel-services" class="panel-section" style="display:none;">
+          <div class="card">
+            <h2>Services (Add / Edit / Remove)</h2>
+            <div class="two-col">
+              <div class="form-group">
+                <label>Icon (emoji)</label>
+                <input id="serviceIcon" type="text" placeholder="e.g. 🚘" />
+              </div>
+              <div class="form-group">
+                <label>Title</label>
+                <input id="serviceTitle" type="text" placeholder="e.g. Car Bookings" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="serviceDescription" placeholder="Short description"></textarea>
+            </div>
+            <input id="editServiceId" type="hidden" value="" />
+            <button id="saveServiceBtn" class="primary-btn">Add Service</button>
+          </div>
+          <div class="card">
+            <h2>Current Services</h2>
+            <div id="services-list" class="grid"></div>
+          </div>
+        </section>
+
+        <!-- Why choose panel -->
+        <section id="panel-whychoose" class="panel-section" style="display:none;">
+          <div class="card">
+            <h2>Why Choose (Add / Edit / Remove)</h2>
+            <div class="two-col">
+              <div class="form-group">
+                <label>Icon (emoji)</label>
+                <input id="whyIcon" type="text" placeholder="e.g. 💸" />
+              </div>
+              <div class="form-group">
+                <label>Title</label>
+                <input id="whyTitle" type="text" placeholder="e.g. Best Price Guarantee" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="whyDescription" placeholder="Short description"></textarea>
+            </div>
+            <input id="editWhyId" type="hidden" value="" />
+            <button id="saveWhyBtn" class="primary-btn">Add Item</button>
+          </div>
+          <div class="card">
+            <h2>Current Why Choose Items</h2>
+            <div id="why-list" class="grid"></div>
+          </div>
+        </section>
+
+        <!-- Settings panel -->
+        <section id="panel-settings" class="panel-section" style="display:none;">
+          <div class="card">
+            <h2>Site Settings</h2>
+            <div class="two-col">
+              <div class="form-group">
+                <label>Brand Name</label>
+                <input id="setBrandName" type="text" />
+              </div>
+              <div class="form-group">
+                <label>Brand Logo URL (optional)</label>
+                <input id="setBrandLogoUrl" type="text" placeholder="/assets/brand/logo.svg" />
+              </div>
+            </div>
+            <div class="two-col">
+              <div class="form-group">
+                <label>Agent Phone (Call)</label>
+                <input id="setAgentPhone" type="text" />
+              </div>
+              <div class="form-group">
+                <label>Admin WhatsApp Phone</label>
+                <input id="setWhatsappAdminPhone" type="text" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Location Line</label>
+              <input id="setLocationLine" type="text" />
+            </div>
+            <div class="form-group">
+              <label>Hero Title</label>
+              <input id="setHeroTitle" type="text" />
+            </div>
+            <div class="form-group">
+              <label>Hero Subtitle</label>
+              <textarea id="setHeroSubtitle"></textarea>
+            </div>
+            <div class="two-col">
+              <div class="form-group">
+                <label>Featured Card Car Name</label>
+                <input id="setFeaturedCarName" type="text" />
+              </div>
+              <div class="form-group">
+                <label>Featured Card Image URL</label>
+                <input id="setFeaturedCarImageUrl" type="text" placeholder="/assets/images/innova-crysta.svg" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Mission Text</label>
+              <textarea id="setMissionText"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Vision Text</label>
+              <textarea id="setVisionText"></textarea>
+            </div>
+            <div class="two-col">
+              <div class="form-group">
+                <label>Footer CTA Text</label>
+                <input id="setFooterCtaText" type="text" />
+              </div>
+              <div class="form-group">
+                <label>Footer Support Label</label>
+                <input id="setFooterSupportLabel" type="text" />
+              </div>
+            </div>
+            <button id="saveSettingsBtn" class="primary-btn">Save Settings</button>
+          </div>
+        </section>
+
+        <!-- Feedback panel -->
+        <section id="panel-feedback" class="panel-section" style="display:none;">
+          <div class="card">
+            <h2>Pending Feedbacks</h2>
+            <div id="admin-feedbacks"></div>
+          </div>
+          <div class="card">
+            <h2>Approved Feedbacks (read-only)</h2>
+            <div id="admin-approved-feedbacks"></div>
+          </div>
+        </section>
+
+        <!-- Requirements panel -->
+        <section id="panel-requirements" class="panel-section" style="display:none;">
+          <div class="card">
+            <h2>Custom Requirements Inbox</h2>
+            <div id="requirements-list" class="grid"></div>
+          </div>
+        </section>
+
+        <!-- Trips panel -->
+        <section id="panel-trips" class="panel-section" style="display:none;">
+          <div class="card">
+            <h2>Plan My Trip Inbox</h2>
+            <div id="trip-plans-list" class="grid"></div>
+          </div>
+        </section>
+
+        <!-- Support panel -->
+        <section id="panel-support" class="panel-section" style="display:none;">
+          <div class="card">
+            <h2>Support / Complaints Inbox</h2>
+            <div id="support-list" class="grid"></div>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Shiv Travels Admin Dashboard</p>
+    </div>
+  </footer>
+  <script src="config.js"></script>
+  <script src="admin-dashboard-modern.js"></script>    
+</body>
+</html> 

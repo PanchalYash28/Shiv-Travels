@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create Account – Shiv Travels</title>
+  <link rel="stylesheet" href="create-account.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Shiv Travels</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Create Account</h2>
+
+      <!-- STEP 1: Enter Details -->
+      <div id="step1">
+        <h3 style="margin-bottom: 20px; color: #333; font-size: 1.1em;">📧 Registration Details</h3>
+        <input id="email" type="email" placeholder="Email Address" required />
+        <input id="name" type="text" placeholder="Full Name" required />
+        <input id="phone" type="text" placeholder="Enter phone number by +91 country code" required />
+        <button id="sendOtp">📧 Send OTP</button>
+      </div>
+
+      <!-- STEP 2: Verify OTP & Set Password -->
+      <div id="step2" style="display:none;">
+        <h3 style="margin-bottom: 20px; color: #333; font-size: 1.1em;">✅ Verify OTP</h3>
+        <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">📧 Check your email for the 6-digit OTP code</p>
+        <input id="otp" type="text" placeholder="Enter 6-digit OTP" maxlength="6" required />
+        <input id="password" type="password" placeholder="Create Password" required />
+        <button id="verifyOtp">✅ Verify & Create Account</button>
+      </div>
+
+      <!-- STEP 3: Setup 2FA (Optional) -->
+      <div id="step3" style="display:none;">
+        <h3 style="margin-bottom: 20px; color: #333; font-size: 1.1em;">🔐 Secure Your Account (Optional)</h3>
+        <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">Want extra security? Setup Google Authenticator</p>
+        <button id="setupTOTP" style="background-color: #28a745; margin-bottom: 10px;">🔐 Setup Google Authenticator</button>
+        <button id="skipTOTP" style="background-color: #6c757d;">⏭️ Skip for Now</button>
+      </div>
+
+      <p id="msg" class="msg"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Shiv Travels | Contact: <a href="https://wa.me/919824926485" target="_blank">+91 9824926485</a></p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="create-account.js"></script>
+</body>
+</html>

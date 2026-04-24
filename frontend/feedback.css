@@ -1,0 +1,40 @@
+:root{
+  --primary:#1d4ed8;
+  --bg:#f7fafc;
+  --text:#0f172a;
+  --muted:#6b7280;
+  --radius:10px;
+}
+
+body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);}
+.container{max-width:700px;margin:0 auto;padding:20px}
+.site-header,.site-footer{background:white;border-bottom:1px solid #e5e7eb;text-align:center;padding:12px 0}
+.brand{color:var(--primary);font-weight:700;margin:0}
+.nav a{margin-left:12px;text-decoration:none;color:var(--text);font-weight:500}
+.nav a:hover{color:var(--primary)}
+.card{background:white;padding:24px;border-radius:var(--radius);box-shadow:0 6px 16px rgba(15,23,42,0.08);margin-top:30px}
+.card h2{text-align:center;color:var(--primary)}
+.card textarea,
+.card input{width:100%;padding:10px;margin-bottom:10px;border:1px solid #cbd5e1;border-radius:var(--radius);font-size:15px}
+.card button{width:100%;padding:10px;background:var(--primary);color:white;font-weight:600;border:none;border-radius:var(--radius);cursor:pointer}
+.card button:hover{background:#2563eb}
+.msg{text-align:center;margin-top:10px;color:var(--muted)}
+.feedback-list{margin-top:20px;display:flex;flex-direction:column;gap:16px}
+.feedback-item{background:#f9fafb;border-left:4px solid var(--primary);padding:14px;border-radius:var(--radius)}
+.feedback-item h4{margin:0 0 6px;color:var(--primary)}
+.feedback-item h4{margin:0 0 6px;color:var(--primary)}
+.star-rating {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+.star {
+  color: #ffd814;
+  transition: color 0.2s;
+}
+.star.inactive {
+  color: #e5e7eb;
+}
+.feedback-item p{margin:0;color:var(--muted)}
