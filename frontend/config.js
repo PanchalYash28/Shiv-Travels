@@ -29,48 +29,48 @@
 // })();
 
 // Global frontend configuration for Shiv Travels.
-(function () {
-  function normalizeOrigin(origin) {
-    const o = String(origin || '').trim().replace(/\/+$/, '');
-    return o || 'https://shiv-travels-api.onrender.com';
-  }
+// (function () {
+//   function normalizeOrigin(origin) {
+//     const o = String(origin || '').trim().replace(/\/+$/, '');
+//     return o || 'https://shiv-travels-api.onrender.com';
+//   }
 
-  const ls = (() => {
-    try { return localStorage.getItem('SHIV_API_ORIGIN'); } catch { return null; }
-  })();
+//   const ls = (() => {
+//     try { return localStorage.getItem('SHIV_API_ORIGIN'); } catch { return null; }
+//   })();
 
-  const apiOrigin =
-    normalizeOrigin(
-      (typeof window !== 'undefined' && window.SHIV_API_ORIGIN) ||
-      ls ||
-      'https://shiv-travels-api.onrender.com'
-    );
+//   const apiOrigin =
+//     normalizeOrigin(
+//       (typeof window !== 'undefined' && window.SHIV_API_ORIGIN) ||
+//       ls ||
+//       'https://shiv-travels-api.onrender.com'
+//     );
 
-  window.SHIV_CONFIG = {
-    apiOrigin,
-    apiBase: apiOrigin + '/api',
-  };
-})();
+//   window.SHIV_CONFIG = {
+//     apiOrigin,
+//     apiBase: apiOrigin + '/api',
+//   };
+// })();
 
 
 
 // Global frontend configuration for Shiv Travels.
-// (function () {
-//   function normalizeOrigin(origin) {
-//     return String(origin || "").trim().replace(/\/+$/, "");
-//   }
+(function () {
+  function normalizeOrigin(origin) {
+    return String(origin || "").trim().replace(/\/+$/, "");
+  }
 
-//   const isLocalhost =
-//     window.location.hostname === "localhost" ||
-//     window.location.hostname === "127.0.0.1";
+  const isLocalhost =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1";
 
-//   const localAPI = "http://localhost:4000";
-//   const liveAPI = "https://shiv-travels-api.onrender.com";
+  const localAPI = "http://localhost:4000";
+  const liveAPI = "https://shiv-travels-api.onrender.com";
 
-//   const apiOrigin = isLocalhost ? localAPI : liveAPI;
+  const apiOrigin = isLocalhost ? localAPI : liveAPI;
 
-//   window.SHIV_CONFIG = {
-//     apiOrigin,
-//     apiBase: apiOrigin + "/api",
-//   };
-// })();
+  window.SHIV_CONFIG = {
+    apiOrigin,
+    apiBase: apiOrigin + "/api",
+  };
+})();
